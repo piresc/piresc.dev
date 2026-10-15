@@ -105,7 +105,9 @@ export const workExperience = [
     role: "Software Engineer",
     company: "Telkomsel",
     period: "Oct 2024 – Present",
-    summary: "Driving in-house ownership, engineering standards, and modernization across the MyTelkomsel web ecosystem.",
+    phase: "Modernization",
+    summary: "Service ownership, software quality standards, and modernization across the MyTelkomsel web ecosystem.",
+    proof: ["27 services", "GitLab CI/CD", "Quality gates"],
     projects: [
       {
         title: "MyTelkomsel Web Ecosystem",
@@ -129,7 +131,9 @@ export const workExperience = [
     role: "Software Engineer",
     company: "Tokopedia",
     period: "Oct 2021 – Aug 2024",
-    summary: "Owned digital fulfillment services for 4,000+ SKUs across 100+ suppliers at >300 RPS.",
+    phase: "Scale",
+    summary: "Backend ownership for digital fulfillment, supplier integrations, reliability, and operational efficiency.",
+    proof: ["4,000+ SKUs", "100+ suppliers", ">300 RPS"],
     projects: [
       {
         title: "Fulfillment Nextgen",
@@ -153,7 +157,9 @@ export const workExperience = [
     role: "Developer",
     company: "Apple Academy",
     period: "2020",
-    summary: "Selected as 1 of 200 from 2,500+ applicants; built and shipped 7 iOS apps.",
+    phase: "Product",
+    summary: "iOS product work, user research, and interface decisions before specializing deeper in backend systems.",
+    proof: ["7 iOS apps", "Usability testing", "Swift"],
     projects: [
       {
         title: "Videre/Mumu AR App",

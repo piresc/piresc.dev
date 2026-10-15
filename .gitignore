@@ -49,3 +49,20 @@ Gemfile.lock
 
 # local tooling artifacts
 .codex/
+.superpowers/
+
+# local claude / impeccable / playwright artifacts
+.claude/
+.impeccable/
+.playwright-mcp/
+
+# generated portfolio review screenshots
+*-assess.png
+desktop-*.png
+mobile-*.png
+preview-fonts-*.png
+portfolio-full.png
+polish-*.png
+
+# antislop audit working files (reports + evidence captures)
+anti-slop/

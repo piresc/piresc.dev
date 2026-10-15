@@ -15,3 +15,11 @@ export const socialProfiles = [
   { name: 'Behance', href: socialLinks.behance },
   { name: 'Instagram', href: socialLinks.instagram },
 ] as const;
+
+export const launchpadSites = [
+  { name: 'score', href: 'https://score.piresc.dev' },
+  { name: 'assetpulse', href: 'https://assetpulse.piresc.dev' },
+  { name: 'peraturanku', href: 'https://peraturanku.piresc.dev' },
+  { name: 'jellyfin', href: 'https://jellyfin.piresc.dev' },
+  { name: 'files', href: 'https://files.piresc.dev' },
+] as const;

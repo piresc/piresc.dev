@@ -1,21 +1,23 @@
-import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { projects, workExperience, type Project } from '../data/portfolio';
 import { useRef } from 'react';
 import { getScaleInMotion, motionEase } from '../lib/motion';
+import SceneVideo from './SceneVideo';
+import { useReducedMotion } from '../lib/useReducedMotion';
 
 const videoUrl = '/videos/projects.mp4';
 
 function ProjectCard({
-  number,
   project,
   index,
   shouldReduceMotion,
+  featured = false,
 }: {
-  number: string;
   project: Project;
   index: number;
   shouldReduceMotion: boolean;
+  featured?: boolean;
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -34,21 +36,20 @@ function ProjectCard({
           ? { duration: 0 }
           : { duration: 0.5, delay: index * 0.1, ease: motionEase }
       }
-      className="group surface-strong p-6 card-ratio flex flex-col transition-colors duration-300 hover:border-[var(--border-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+      className={`group project-card-hover p-6 flex flex-col transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)] ${featured ? 'surface sm:col-span-2' : 'surface-strong'}`}
     >
       <div className="flex items-center justify-between mb-4">
-        <span className="meta-label tone-subtle">{number}</span>
+        <span className="meta-label tone-subtle">{project.role}</span>
         <span className="meta-label text-right tone-subtle">{project.period}</span>
       </div>
 
       <h3 className="text-primary text-xl sm:text-2xl mb-1 font-medium">{project.title}</h3>
-      <p className="meta-label mb-4 tone-subtle">{project.role}</p>
       <p className="text-sm leading-5 mb-5 tone-muted">{project.overview}</p>
 
-      <ul className="space-y-2 flex-grow">
+      <ul className={`flex-grow ${featured ? 'grid sm:grid-cols-2 gap-2' : 'space-y-2'}`}>
         {project.impact.slice(0, 3).map((item, i) => (
-          <li key={i} className="flex items-start gap-2">
-            <span className="text-primary mt-2">—</span>
+          <li key={i} className="flex items-baseline gap-2">
+            <span className="text-primary text-sm">·</span>
             <span className="text-sm tone-muted">{item}</span>
           </li>
         ))}
@@ -71,7 +72,7 @@ function ProjectCard({
 }
 
 export default function Projects() {
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section id="projects" className="min-h-screen bg-black relative">
@@ -80,36 +81,21 @@ export default function Projects() {
       <div className="relative z-10 px-4 md:px-6 py-20 md:py-32">
         <div className="max-w-7xl mx-auto mb-12 md:mb-16">
           <h2 className="text-primary mb-4 section-title">
-            Building Resilient & Scalable Distributed Systems.
+            What I've shipped.
           </h2>
-          <p className="section-lead tone-subtle max-w-none w-full md:whitespace-nowrap">
-            Specializing in high-throughput fulfillment and transforming legacy enterprise architectures at scale.
+          <p className="section-lead tone-subtle max-w-2xl">
+            Fulfillment infrastructure at Tokopedia, service quality standards at Telkomsel, and product work at Apple Academy.
           </p>
         </div>
 
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
             <motion.div
               {...getScaleInMotion(shouldReduceMotion)}
-              className="relative overflow-hidden surface card-ratio"
+              className="relative flex flex-col justify-end overflow-hidden surface sm:col-span-2 lg:col-span-1 min-h-[280px]"
             >
-              {shouldReduceMotion ? (
-                <div className="absolute inset-0 bg-[var(--surface)]" />
-              ) : (
-                <video
-                  src={videoUrl}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                  aria-hidden="true"
-                  disablePictureInPicture
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
+              <SceneVideo src={videoUrl} defer />
+              <div className="scene-caption relative p-6">
                 <p className="meta-label mb-2 tone-subtle">Current Role</p>
                 <p className="tone-text text-lg">
                   {workExperience[0].role}
@@ -123,10 +109,10 @@ export default function Projects() {
             {projects.map((project, i) => (
               <ProjectCard
                 key={project.title}
-                number={String(i + 1).padStart(2, '0')}
                 project={project}
                 index={i + 1}
                 shouldReduceMotion={shouldReduceMotion}
+                featured={i === 0}
               />
             ))}
           </div>
